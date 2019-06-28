@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>DotNetConcept.Toolkit.Core</AssemblyName>
-    <RootNamespace>DotNetConcept.Toolkit.Core</RootNamespace>
+    <RootNamespace>DotNetConcept.Toolkit</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DotNetConcept.Toolkit.Core.Extensions
+﻿namespace DotNetConcept.Toolkit.Extensions
 {
     using System.Linq;
 

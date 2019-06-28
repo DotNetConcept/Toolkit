@@ -1,4 +1,4 @@
-﻿namespace DotNetConcept.Toolkit.Core.Extensions
+﻿namespace DotNetConcept.Toolkit.Extensions
 {
     using System;
     using System.Collections.Generic;
