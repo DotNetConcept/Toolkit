@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>DotNetConcept.Toolkit.AspNetCore</AssemblyName>
-    <RootNamespace>DotNetConcept.Toolkit.AspNetCore</RootNamespace>
+    <AssemblyName>DotNetConcept.Toolkit.AspNetCore.Mvc</AssemblyName>
+    <RootNamespace>DotNetConcept.Toolkit.AspNetCore.Mvc</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
