@@ -1,9 +1,13 @@
-﻿namespace DotNetConcept.Toolkit.AspNetCore.Pagination
+﻿namespace DotNetConcept.Toolkit.AspNetCore.Mvc
 {
     using System.Net;
+
     using Ardalis.GuardClauses;
+
     using Microsoft.AspNetCore.Mvc;
+
     using Newtonsoft.Json;
+
     using X.PagedList;
 
     public abstract class ExtendedControllerBase : ControllerBase
