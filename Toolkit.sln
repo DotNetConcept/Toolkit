@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore.Mvc", "src\AspNe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ocelot", "src\AspNetCore\Ocelot\Ocelot.csproj", "{2B7BD8D0-4936-4EAE-970D-A807E339B819}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestSharp", "src\RestSharp\RestSharp.csproj", "{9882C511-06E7-4007-AAAC-4B8ED2DCABFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{2B7BD8D0-4936-4EAE-970D-A807E339B819}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B7BD8D0-4936-4EAE-970D-A807E339B819}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B7BD8D0-4936-4EAE-970D-A807E339B819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9882C511-06E7-4007-AAAC-4B8ED2DCABFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9882C511-06E7-4007-AAAC-4B8ED2DCABFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9882C511-06E7-4007-AAAC-4B8ED2DCABFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9882C511-06E7-4007-AAAC-4B8ED2DCABFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

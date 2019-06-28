@@ -1,8 +1,11 @@
 ﻿namespace DotNetConcept.Toolkit.AspNetCore.Mvc
 {
+    using System;
     using System.Net;
 
     using Ardalis.GuardClauses;
+
+    using IdentityModel;
 
     using Microsoft.AspNetCore.Mvc;
 
@@ -12,7 +15,14 @@
 
     public abstract class ExtendedControllerBase : ControllerBase
     {
-        public IActionResult PartialContent<T>(IPagedList<T> pagedList)
+        public virtual Guid? GetUserIdFromJwtToken()
+        {
+            return Guid.TryParse(this.User.FindFirst(JwtClaimTypes.Subject)?.Value, out var result)
+                       ? (Guid?)result
+                       : null;
+        }
+
+        public virtual IActionResult PartialContent<T>(IPagedList<T> pagedList)
         {
             Guard.Against.Null(pagedList, nameof(pagedList));
 
