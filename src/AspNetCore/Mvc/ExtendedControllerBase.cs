@@ -3,9 +3,9 @@
     using System;
     using System.Net;
 
-    using Ardalis.GuardClauses;
-
     using IdentityModel;
+
+    using JetBrains.Annotations;
 
     using Microsoft.AspNetCore.Mvc;
 
@@ -22,10 +22,8 @@
                        : null;
         }
 
-        public virtual IActionResult PartialContent<T>(IPagedList<T> pagedList)
+        public virtual IActionResult PartialContent<T>([NotNull]IPagedList<T> pagedList)
         {
-            Guard.Against.Null(pagedList, nameof(pagedList));
-
             var paginationHeader = new
                                        {
                                            pagedList.PageNumber,

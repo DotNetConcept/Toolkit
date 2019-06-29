@@ -2,14 +2,12 @@
 {
     using System.Linq;
 
-    using Ardalis.GuardClauses;
+    using JetBrains.Annotations;
 
     public static class ObjectExtensions
     {
-        public static bool In<T>(this T source, params T[] values)
+        public static bool In<T>([NotNull]this T source, params T[] values)
         {
-            Guard.Against.Null(source, nameof(source));
-
             if (values?.Any() != true)
             {
                 return false;
