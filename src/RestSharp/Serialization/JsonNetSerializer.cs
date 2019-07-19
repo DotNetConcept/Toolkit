@@ -1,5 +1,9 @@
 ﻿namespace DotNetConcept.Toolkit.RestSharp.Serialization
 {
+    using System.Threading.Tasks;
+
+    using Fody;
+
     using global::RestSharp;
     using global::RestSharp.Serialization;
 
