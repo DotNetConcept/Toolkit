@@ -5,13 +5,41 @@
 
 trigger:
 - master
+- develop
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'DotNetConcept'
 
 variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
+- task: GitVersion@4
+- script: dotnet build --configuration $(buildConfiguration) /p:Version=$(GitVersion.SemVer);InformationalVersion=$(GitVersion.InformationalVersion);Authors=DotNetConcept 
   displayName: 'dotnet build $(buildConfiguration)'
+- task: VSTest@2
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
+- task: DotNetCoreCLI@2
+  displayName: 'NuGet Pack'
+  inputs:
+    command: 'pack'
+    packagesToPack: 'src/**/*.csproj'
+    includesymbols: true
+    includesource: true
+    nobuild: true
+    verbosityPack: Normal
+    versioningScheme: byEnvVar
+    versionEnvVar: 'GitVersion_SemVer'
+- task: DotNetCoreCLI@2
+  displayName: 'NuGet Publish'
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.symbols.nupkg'
+    nuGetFeedType: 'internal'
+    publishVstsFeed: '972d2924-71d3-4c8a-a316-58c3f5ff36cf'
