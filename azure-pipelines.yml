@@ -15,7 +15,7 @@ variables:
 
 steps:
 - task: GitVersion@4
-- script: dotnet build --configuration $(buildConfiguration) /p:Version=$(GitVersion.NuGetVersion) /p:InformationalVersion=$(GitVersion.InformationalVersion) /p:Authors=DotNetConcept 
+- script: dotnet build --configuration $(buildConfiguration) /p:Version=$(GitVersion.SemVer);InformationalVersion=$(GitVersion.InformationalVersion);Authors=DotNetConcept 
   displayName: 'dotnet build $(buildConfiguration)'
 - task: VSTest@2
   inputs:
@@ -35,7 +35,7 @@ steps:
     nobuild: true
     verbosityPack: Normal
     versioningScheme: byEnvVar
-    versionEnvVar: 'GitVersion_NuGetVersion'
+    versionEnvVar: 'GitVersion_SemVer'
 - task: DotNetCoreCLI@2
   displayName: 'NuGet Publish'
   inputs:
