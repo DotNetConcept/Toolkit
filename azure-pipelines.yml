@@ -15,7 +15,7 @@ variables:
 
 steps:
 - task: GitVersion@4
-- script: dotnet build --configuration $(buildConfiguration) /p:Version=$(GitVersion.SemVer) /p:InformationalVersion=$(GitVersion.InformationalVersion) /p:Authors=DotNetConcept 
+- script: dotnet build --configuration $(buildConfiguration) /p:Version=$(GitVersion.NuGetVersion) /p:InformationalVersion=$(GitVersion.InformationalVersion) /p:Authors=DotNetConcept 
   displayName: 'dotnet build $(buildConfiguration)'
 - task: VSTest@2
   inputs:
