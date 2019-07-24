@@ -29,14 +29,16 @@ steps:
   displayName: 'NuGet Pack'
   inputs:
     command: 'pack'
-    packagesToPack: '**/*.csproj'
+    packagesToPack: 'src/**/*.csproj'
     includesymbols: true
     includesource: true
+    nobuild: true
+    verbosityPack: Normal
     versioningScheme: 'byBuildNumber'
 - task: DotNetCoreCLI@2
   displayName: 'NuGet Publish'
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.symbols.nupkg'
     nuGetFeedType: 'internal'
     publishVstsFeed: '972d2924-71d3-4c8a-a316-58c3f5ff36cf'
