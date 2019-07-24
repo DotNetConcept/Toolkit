@@ -34,7 +34,8 @@ steps:
     includesource: true
     nobuild: true
     verbosityPack: Normal
-    versioningScheme: 'byBuildNumber'
+    versioningScheme: byEnvVar
+    versionEnvVar: GitVersion
 - task: DotNetCoreCLI@2
   displayName: 'NuGet Publish'
   inputs:
