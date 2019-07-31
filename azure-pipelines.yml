@@ -8,7 +8,7 @@ trigger:
 - develop
 
 pool:
-  name: 'DotNetConcept'
+  name: 'On-Premise'
 
 variables:
   buildConfiguration: 'Release'
