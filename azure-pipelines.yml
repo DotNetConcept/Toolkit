@@ -11,10 +11,17 @@ pool:
   name: 'On-Premise'
 
 variables:
-  buildConfiguration: 'Release'
+- group: NuGet
+- name: buildConfiguration
+  value: 'Release'
 
 steps:
 - task: GitVersion@4
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+    vstsFeed: '972d2924-71d3-4c8a-a316-58c3f5ff36cf'
 - script: dotnet build --configuration $(buildConfiguration) /p:Version=$(GitVersion.SemVer);InformationalVersion=$(GitVersion.InformationalVersion);Authors=DotNetConcept 
   displayName: 'dotnet build $(buildConfiguration)'
 - task: VSTest@2
