@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestSharp", "src\RestSharp\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{00FE9DF5-D3B6-45F2-B543-41165560C65B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "tests\Core.Tests\Core.Tests.csproj", "{16E13EEA-BA99-42C4-A2BF-DD1AE8D9A70C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Tests", "tests\Core.Tests\Core.Tests.csproj", "{16E13EEA-BA99-42C4-A2BF-DD1AE8D9A70C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swagger", "src\AspNetCore\Swagger\Swagger.csproj", "{1CFFDEE7-B596-46A7-843E-9A054A8BF931}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{16E13EEA-BA99-42C4-A2BF-DD1AE8D9A70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16E13EEA-BA99-42C4-A2BF-DD1AE8D9A70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16E13EEA-BA99-42C4-A2BF-DD1AE8D9A70C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CFFDEE7-B596-46A7-843E-9A054A8BF931}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CFFDEE7-B596-46A7-843E-9A054A8BF931}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CFFDEE7-B596-46A7-843E-9A054A8BF931}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CFFDEE7-B596-46A7-843E-9A054A8BF931}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{D2BC1908-9AE3-4B98-AB61-1993248BC849} = {26012ED1-A390-4A4E-8CEC-46F68728D1B0}
 		{2B7BD8D0-4936-4EAE-970D-A807E339B819} = {26012ED1-A390-4A4E-8CEC-46F68728D1B0}
 		{16E13EEA-BA99-42C4-A2BF-DD1AE8D9A70C} = {00FE9DF5-D3B6-45F2-B543-41165560C65B}
+		{1CFFDEE7-B596-46A7-843E-9A054A8BF931} = {26012ED1-A390-4A4E-8CEC-46F68728D1B0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90D9FFF7-C08D-4AF7-962A-79830EAA0365}
