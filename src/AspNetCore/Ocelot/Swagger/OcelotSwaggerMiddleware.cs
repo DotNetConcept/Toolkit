@@ -32,15 +32,15 @@
             if (this._config.SwaggerEndPoints.Exists(i => i.Url == path))
             {
                 var ocelotConfig = this._internalConfiguration.Get().Data;
-                var matchedReRoute = (from i in ocelotConfig.ReRoutes
-                                      from j in i.DownstreamReRoute
+                var matchedReRoute = (from i in ocelotConfig.Routes
+                                      from j in i.DownstreamRoute
                                       where j.UpstreamPathTemplate.OriginalValue.Equals(path, StringComparison.OrdinalIgnoreCase)
                                       select j).ToList();
                 if (matchedReRoute.Count > 0)
                 {
                     var matchedHost = matchedReRoute.First().DownstreamAddresses.First();
-                    var anotherReRoutes = (from i in ocelotConfig.ReRoutes
-                                           from j in i.DownstreamReRoute
+                    var anotherReRoutes = (from i in ocelotConfig.Routes
+                                           from j in i.DownstreamRoute
                                            where j.DownstreamAddresses.Exists(k => k.Host == matchedHost.Host && k.Port == matchedHost.Port)
                                            select j).ToList();
 

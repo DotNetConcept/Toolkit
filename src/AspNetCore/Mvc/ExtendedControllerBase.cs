@@ -48,19 +48,14 @@
         /// </summary>
         /// <param name="pagedList">The paged list.</param>
         /// <returns></returns>
-        public virtual IActionResult PartialContent([NotNull]IPagedList pagedList)
+        public virtual IActionResult PartialContent([NotNull] IPagedList pagedList)
         {
-            var paginationHeader = new
-                                       {
-                                           Page = pagedList.PageNumber,
-                                           pagedList.PageSize,
-                                           Items = pagedList.TotalItemCount,
-                                           Pages = pagedList.PageCount,
-                                       };
-
+            var metadata = new PagedListMetaData(pagedList);
+            
             this.Request.HttpContext.Response.Headers.Add(
                 "X-Pagination",
-                JsonConvert.SerializeObject(paginationHeader));
+                JsonConvert.SerializeObject(metadata));
+
             return pagedList.PageCount > 1
                        ? this.StatusCode((int)HttpStatusCode.PartialContent, pagedList)
                        : this.Ok(pagedList);
@@ -69,19 +64,37 @@
         /// <summary>
         /// Converts the specified response.
         /// </summary>
+        /// <typeparam name="TResponse">The type of the response.</typeparam>
+        /// <typeparam name="TData">The type of the data.</typeparam>
         /// <param name="response">The response.</param>
         /// <returns></returns>
-        public virtual IActionResult Result([NotNull] IResponse response)
+        public virtual IActionResult Result<TResponse, TData>([NotNull] TResponse response)
+            where TResponse : IResponse<TData>
+        {
+            if (response.Status != ResponseStatus.Success)
+            {
+                return this.Result((IResponse)response);
+            }
+
+            if (response.Data is IPagedList pagedList)
+            {
+                return this.PartialContent(pagedList);
+            }
+
+            return response.Data != null ? (IActionResult)this.Ok(response.Data) : this.NotFound();
+        }
+
+        /// <summary>
+        /// Converts the specified response.
+        /// </summary>
+        /// <param name="response">The response.</param>
+        /// <returns></returns>
+        public virtual IActionResult Result<TResponse>([NotNull] TResponse response) where TResponse : IResponse
         {
             switch (response.Status)
             {
                 case ResponseStatus.Success:
-                    if (response.Data is IPagedList pagedList)
-                    {
-                        return this.PartialContent(pagedList);
-                    }
-
-                    return response.Data != null ? (IActionResult)this.Ok(response.Data) : this.NotFound();
+                    return this.Ok();
 
                 case ResponseStatus.Conflict:
                     return response.Message.IsNullOrWhiteSpace()
