@@ -52,10 +52,10 @@
         {
             var paginationHeader = new
                                        {
-                                           pagedList.PageNumber,
+                                           Page = pagedList.PageNumber,
                                            pagedList.PageSize,
-                                           pagedList.TotalItemCount,
-                                           pagedList.PageCount,
+                                           Items = pagedList.TotalItemCount,
+                                           Pages = pagedList.PageCount,
                                        };
 
             this.Request.HttpContext.Response.Headers.Add(

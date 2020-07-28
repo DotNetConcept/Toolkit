@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DotNetConcept.Toolkit.Messaging
+﻿namespace DotNetConcept.Toolkit.Messaging
 {
+    using System;
+
     public abstract class RequestBase : IRequest
     {
-        public Guid RequestId { get; set; }
+        public Guid RequestId { get; } = Guid.NewGuid();
     }
 }

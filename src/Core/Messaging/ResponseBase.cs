@@ -2,126 +2,95 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Collections.ObjectModel;
 
-    public abstract class ResponseBase : IResponse
+    using JetBrains.Annotations;
+
+    public abstract class ResponseBase<TResponse, TData> : ResponseBase<TResponse>
+        where TResponse : IResponse<TData>, new()
     {
-        protected ResponseBase()
-        {
-            this.Headers = new Dictionary<string, object>();
-        }
+        public TData Data { get; set; }
 
+        public static TResponse Success(TData data)
+        {
+            return new TResponse { Data = data, Status = ResponseStatus.Success };
+        }
+    }
+
+    public abstract class ResponseBase<TResponse>
+        where TResponse : IResponse, new()
+    {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ResponseBase"/> class.
-        /// </summary>
-        /// <param name="data">The data.</param>
-        protected ResponseBase(object data, IDictionary<string, object> headers = null)
-        {
-            this.Data = data;
-            this.Status = ResponseStatus.Success;
-            this.Headers = headers ?? new Dictionary<string, object>();
-        }
-
-        protected ResponseBase(ResponseStatus status, string message = null, Exception exception = null, IDictionary<string, object> headers = null)
-        {
-            this.Status = status;
-            this.Message = message;
-            this.Exception = exception;
-            this.Headers = headers ?? new Dictionary<string, object>();
-        }
-
-        /// <summary>
-        /// Gets or sets the response identifier.
+        ///     Gets or sets the exception.
         /// </summary>
         /// <value>
-        /// The response identifier.
+        ///     The exception.
         /// </value>
-        public Guid ResponseId { get; set; } = Guid.NewGuid();
+        public Exception Exception { get; set; }
 
         /// <summary>
-        /// Gets or sets the status.
+        ///     Gets the headers.
         /// </summary>
         /// <value>
-        /// The status.
+        ///     The headers.
         /// </value>
-        public ResponseStatus Status { get; set; }
+        public IReadOnlyDictionary<string, object> Headers { get; protected set; }
 
         /// <summary>
-        /// Gets or sets the message.
+        ///     Gets or sets the message.
         /// </summary>
         /// <value>
-        /// The message.
+        ///     The message.
         /// </value>
         public string Message { get; set; }
 
         /// <summary>
-        /// Gets the headers.
+        ///     Gets or sets the response identifier.
         /// </summary>
         /// <value>
-        /// The headers.
+        ///     The response identifier.
         /// </value>
-        public IDictionary<string, object> Headers { get; set; }
+        public Guid ResponseId { get; } = Guid.NewGuid();
 
         /// <summary>
-        /// Gets or sets the data.
+        ///     Gets or sets the status.
         /// </summary>
         /// <value>
-        /// The data.
+        ///     The status.
         /// </value>
-        public object Data { get; set; }
+        public ResponseStatus Status { get; set; }
 
         /// <summary>
-        /// Gets or sets the exception.
+        /// Gets or sets the code.
         /// </summary>
         /// <value>
-        /// The exception.
+        /// The code.
         /// </value>
-        public Exception Exception { get; set; }
-    }
+        public string Code { get; set; }
 
-    /// <summary>
-    /// The response base.
-    /// </summary>
-    /// <typeparam name="T">
-    /// </typeparam>
-    [SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:FileMayOnlyContainASingleClass", Justification = "Reviewed. Suppression is OK here.")]
-    public abstract class ResponseBase<T> : ResponseBase, IResponse<T>
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ResponseBase{T}"/> class.
-        /// </summary>
-        protected ResponseBase()
+        public static TResponse BadRequest()
         {
-
+            return new TResponse { Status = ResponseStatus.BadRequest };
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ResponseBase{T}"/> class.
-        /// </summary>
-        /// <param name="data">The data.</param>
-        protected ResponseBase(T data) : base(data)
+        public static TResponse Error()
         {
-            this.Data = data;
+            return new TResponse { Status = ResponseStatus.Error };
         }
 
-        /// <summary>
-        /// Gets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        public new T Data { get; set; }
-
-        /// <summary>
-        /// Gets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        object IResponse.Data
+        public static TResponse NotFound()
         {
-            get => this.Data;
-            set => this.Data = (T)value;
+            return new TResponse { Status = ResponseStatus.NotFound };
+        }
+
+        public static TResponse Success()
+        {
+            return new TResponse { Status = ResponseStatus.Success };
+        }
+
+        public virtual void SetHeaders([NotNull] IDictionary<string, object> headers)
+        {
+            this.Headers = new ReadOnlyDictionary<string, object>(headers);
         }
     }
 }

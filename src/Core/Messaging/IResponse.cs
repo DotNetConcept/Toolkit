@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DotNetConcept.Toolkit.Messaging
+﻿namespace DotNetConcept.Toolkit.Messaging
 {
+    using System;
+    using System.Collections.Generic;
+
+    using JetBrains.Annotations;
+
     public interface IResponse
     {
         /// <summary>
@@ -12,7 +13,7 @@ namespace DotNetConcept.Toolkit.Messaging
         /// <value>
         /// The response identifier.
         /// </value>
-        Guid ResponseId { get; set; }
+        Guid ResponseId { get; }
 
         /// <summary>
         /// Gets or sets the status.
@@ -21,14 +22,6 @@ namespace DotNetConcept.Toolkit.Messaging
         /// The status.
         /// </value>
         ResponseStatus Status { get; set; }
-
-        /// <summary>
-        /// Gets or sets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        object Data { get; set; }
 
         /// <summary>
         /// Gets or sets the message.
@@ -44,7 +37,7 @@ namespace DotNetConcept.Toolkit.Messaging
         /// <value>
         /// The headers.
         /// </value>
-        IDictionary<string, object> Headers { get; set; }
+        IReadOnlyDictionary<string, object> Headers { get; }
 
         /// <summary>
         /// Gets or sets the exception.
@@ -53,16 +46,24 @@ namespace DotNetConcept.Toolkit.Messaging
         /// The exception.
         /// </value>
         Exception Exception { get; set; }
+
+        /// <summary>
+        /// Gets or sets the code.
+        /// </summary>
+        /// <value>
+        /// The code.
+        /// </value>
+        string Code { get; set; }
+
+        /// <summary>
+        /// Sets the headers.
+        /// </summary>
+        /// <param name="headers">The headers.</param>
+        void SetHeaders([NotNull] IDictionary<string, object> headers);
     }
 
     public interface IResponse<T> : IResponse
     {
-        /// <summary>
-        /// Gets or sets the data.
-        /// </summary>
-        /// <value>
-        /// The data.
-        /// </value>
-        new T Data { get; set; }
+        T Data { get; set; }
     }
 }
