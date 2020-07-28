@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{FA6500CB-5878-45E7-9AFC-BA439305785D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\Core\Core.csproj", "{76F92916-BC21-42B9-A03F-443781F74F35}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspNetCore", "AspNetCore", "{26012ED1-A390-4A4E-8CEC-46F68728D1B0}"
@@ -19,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{00FE9DF5
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Tests", "tests\Core.Tests\Core.Tests.csproj", "{16E13EEA-BA99-42C4-A2BF-DD1AE8D9A70C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swagger", "src\AspNetCore\Swagger\Swagger.csproj", "{1CFFDEE7-B596-46A7-843E-9A054A8BF931}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Swagger", "src\AspNetCore\Swagger\Swagger.csproj", "{1CFFDEE7-B596-46A7-843E-9A054A8BF931}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

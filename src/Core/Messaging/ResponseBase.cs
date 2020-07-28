@@ -11,6 +11,11 @@
     {
         public TData Data { get; set; }
 
+        /// <summary>
+        /// Returns a success response with specified data.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <returns></returns>
         public static TResponse Success(TData data)
         {
             return new TResponse { Data = data, Status = ResponseStatus.Success };
@@ -20,6 +25,14 @@
     public abstract class ResponseBase<TResponse>
         where TResponse : IResponse, new()
     {
+        /// <summary>
+        ///     Gets or sets the code.
+        /// </summary>
+        /// <value>
+        ///     The code.
+        /// </value>
+        public string Code { get; set; }
+
         /// <summary>
         ///     Gets or sets the exception.
         /// </summary>
@@ -61,33 +74,58 @@
         public ResponseStatus Status { get; set; }
 
         /// <summary>
-        /// Gets or sets the code.
+        /// Returns a "BadRequest" response
         /// </summary>
-        /// <value>
-        /// The code.
-        /// </value>
-        public string Code { get; set; }
-
-        public static TResponse BadRequest()
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
+        public static TResponse BadRequest(string message = null)
         {
-            return new TResponse { Status = ResponseStatus.BadRequest };
+            return new TResponse { Status = ResponseStatus.BadRequest, Message = message };
         }
 
-        public static TResponse Error()
+        /// <summary>
+        /// Returns an error response
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
+        public static TResponse Error(string message = null)
         {
-            return new TResponse { Status = ResponseStatus.Error };
+            return new TResponse { Status = ResponseStatus.Error, Message = message };
         }
 
+        /// <summary>
+        /// Errors the specified exception.
+        /// </summary>
+        /// <param name="exception">The exception.</param>
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
+        public static TResponse Error([NotNull]Exception exception, string message = null)
+        {
+            return new TResponse { Status = ResponseStatus.Error, Exception = exception, Message = message  ?? exception.Message };
+        }
+
+        /// <summary>
+        /// Returns an "NotFound" response
+        /// </summary>
+        /// <returns></returns>
         public static TResponse NotFound()
         {
             return new TResponse { Status = ResponseStatus.NotFound };
         }
 
-        public static TResponse Success()
+        /// <summary>
+        ///     Returns a success response
+        /// </summary>
+        /// <returns></returns>
+        public static TResponse Success(string message = null)
         {
-            return new TResponse { Status = ResponseStatus.Success };
+            return new TResponse { Status = ResponseStatus.Success, Message = message };
         }
 
+        /// <summary>
+        /// Sets the headers.
+        /// </summary>
+        /// <param name="headers">The headers.</param>
         public virtual void SetHeaders([NotNull] IDictionary<string, object> headers)
         {
             this.Headers = new ReadOnlyDictionary<string, object>(headers);
