@@ -84,24 +84,14 @@
         }
 
         /// <summary>
-        /// Returns an error response
-        /// </summary>
-        /// <param name="message">The message.</param>
-        /// <returns></returns>
-        public static TResponse Error(string message = null)
-        {
-            return new TResponse { Status = ResponseStatus.Error, Message = message };
-        }
-
-        /// <summary>
         /// Errors the specified exception.
         /// </summary>
         /// <param name="exception">The exception.</param>
         /// <param name="message">The message.</param>
         /// <returns></returns>
-        public static TResponse Error([NotNull]Exception exception, string message = null)
+        public static TResponse Error(Exception exception = null, string message = null)
         {
-            return new TResponse { Status = ResponseStatus.Error, Exception = exception, Message = message  ?? exception.Message };
+            return new TResponse { Status = ResponseStatus.Error, Exception = exception, Message = message  ?? exception?.Message };
         }
 
         /// <summary>

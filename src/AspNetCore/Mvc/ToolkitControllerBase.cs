@@ -17,7 +17,7 @@
 
     using X.PagedList;
 
-    public abstract class ExtendedControllerBase : ControllerBase
+    public abstract class ToolkitControllerBase : ControllerBase
     {
         /// <summary>
         /// Gets the user identifier from JWT token.
@@ -61,6 +61,19 @@
                        : this.Ok(pagedList);
         }
 
+        protected virtual void AddHttpHeaders([NotNull]IResponse response)
+        {
+            foreach (var header in response.Headers)
+            {
+                this.Response.Headers.Add(header.Key, JsonConvert.SerializeObject(header.Value));    
+            }
+
+            if (!response.Code.IsNullOrWhiteSpace())
+            {
+                this.Response.Headers.Add("Code", response.Code);
+            }
+        }
+
         /// <summary>
         /// Converts the specified response.
         /// </summary>
@@ -75,6 +88,8 @@
             {
                 return this.Result((IResponse)response);
             }
+
+            this.AddHttpHeaders(response);
 
             if (response.Data is IPagedList pagedList)
             {
@@ -91,6 +106,8 @@
         /// <returns></returns>
         public virtual IActionResult Result<TResponse>([NotNull] TResponse response) where TResponse : IResponse
         {
+            this.AddHttpHeaders(response);
+
             switch (response.Status)
             {
                 case ResponseStatus.Success:
