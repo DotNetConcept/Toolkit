@@ -100,7 +100,7 @@ namespace DotNetConcept.Toolkit.Tests
         [Fact]
         public void CreateConflictRequestResponse()
         {
-            var response = Response.NotFound().WithCode("789");
+            var response = Response.Conflict().WithCode("789");
             Assert.NotNull(response);
             Assert.Null(response.Exception);
             Assert.Null(response.Message);

@@ -103,6 +103,11 @@
             return new TResponse { Status = ResponseStatus.NotFound };
         }
 
+        public static TResponse Conflict()
+        {
+            return new TResponse { Status = ResponseStatus.Conflict };
+        }
+
         /// <summary>
         ///     Returns a success response
         /// </summary>
