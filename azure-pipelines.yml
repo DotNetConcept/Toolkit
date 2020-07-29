@@ -24,6 +24,22 @@ stages:
       inputs:
         versionSpec: '5.3.7'
     - task: gitversion/execute@0
+    - task: Assembly-Info-NetCore@2
+      inputs:
+        Path: '$(Build.SourcesDirectory)'
+        FileNames: '**/*.csproj'
+        InsertAttributes: false
+        FileEncoding: 'auto'
+        WriteBOM: false
+        Product: 'DotNetConcept.Toolkit'
+        VersionNumber: '$(GitVersion.SemVer)'
+        FileVersionNumber: '$(GitVersion.SemVer)'
+        InformationalVersion: '$(GitVersion.InformationalVersion)'
+        PackageVersion: '$(GitVersion.SemVer)'
+        LogLevel: 'verbose'
+        FailOnWarning: false
+        DisableTelemetry: false
+        
     - script: dotnet build --configuration $(buildConfiguration)
       displayName: dotnet build
       
