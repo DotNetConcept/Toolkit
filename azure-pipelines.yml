@@ -33,7 +33,6 @@ stages:
         WriteBOM: false
         Product: 'DotNetConcept.Toolkit'
         VersionNumber: '$(GitVersion.SemVer)'
-        FileVersionNumber: '$(GitVersion.SemVer)'
         InformationalVersion: '$(GitVersion.InformationalVersion)'
         PackageVersion: '$(GitVersion.SemVer)'
         LogLevel: 'verbose'
