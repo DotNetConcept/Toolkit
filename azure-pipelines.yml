@@ -61,7 +61,7 @@ stages:
       displayName: Create NuGet packages
       inputs:
         command: 'pack'
-        packagesToPack: '**/*.csproj'
+        packagesToPack: 'src/**/*.csproj'
         nobuild: true
         includesymbols: true
         includesource: true
