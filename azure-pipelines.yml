@@ -33,9 +33,11 @@ stages:
         FileEncoding: 'auto'
         WriteBOM: false
         Product: 'DotNetConcept.Toolkit'
+        Company: 'DotNetConcept'
+        Copyright: 'Copyright (c) DotNetConcept 2020'
+        FileVersionNumber: '$(GitVersion.SemVer)'
         VersionNumber: '$(GitVersion.SemVer)'
         InformationalVersion: '$(GitVersion.InformationalVersion)'
-        PackageVersion: '$(GitVersion.SemVer)'
         LogLevel: 'verbose'
         FailOnWarning: false
         DisableTelemetry: false
