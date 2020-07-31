@@ -25,13 +25,11 @@ stages:
         versionSpec: '5.3.7'
     - task: gitversion/execute@0
 
-    - script: echo $(GitVersion.SemVer)
-
     - task: Assembly-Info-NetCore@2
       inputs:
         Path: '$(Build.SourcesDirectory)'
         FileNames: '**/*.csproj'
-        InsertAttributes: false
+        InsertAttributes: true
         FileEncoding: 'auto'
         WriteBOM: false
         Product: 'DotNetConcept.Toolkit'
@@ -39,6 +37,7 @@ stages:
         Copyright: 'Copyright (c) DotNetConcept 2020'
         FileVersionNumber: '$(GitVersion.SemVer)'
         VersionNumber: '$(GitVersion.SemVer)'
+        PackageVersion: '$(GitVersion.SemVer)'
         InformationalVersion: '$(GitVersion.InformationalVersion)'
         LogLevel: 'verbose'
         FailOnWarning: false
