@@ -20,8 +20,13 @@ stages:
   - job: Build
     steps:
 
+    - task: gitversion/setup@0
+      displayName: Setup GitVersion
+      inputs:
+        versionSpec: 5.3.7
+
     - task: gitversion/execute@0
-      displayName: GitVersion
+      displayName: Execute GitVersion
 
     - task: Assembly-Info-NetCore@2
       displayName: Set assembly information
