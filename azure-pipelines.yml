@@ -13,7 +13,6 @@ pool:
 variables:
   buildConfiguration: 'Release'
   isMain: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
-  GitVersion.SemVer: ''
 
 stages:
 - stage: Build
@@ -25,6 +24,9 @@ stages:
       inputs:
         versionSpec: '5.3.7'
     - task: gitversion/execute@0
+
+    - script: echo $(GitVersion.SemVer)
+
     - task: Assembly-Info-NetCore@2
       inputs:
         Path: '$(Build.SourcesDirectory)'
