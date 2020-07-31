@@ -45,15 +45,21 @@ stages:
     - script: dotnet build --configuration $(buildConfiguration)
       displayName: dotnet build
       
-    - task: VSTest@2
+    - task: DotNetCoreCLI@2
       inputs:
-        testSelector: 'testAssemblies'
-        testAssemblyVer2: |
-          tests\**\*Tests*.dll
-          !**\obj\**
-          !**\xunit.runner.visualstudio.testadapter.dll
-          !**\xunit.runner.visualstudio.dotnetcore.testadapter.dll
-        searchFolder: '$(System.DefaultWorkingDirectory)'
+        command: test
+        projects: '**/*Tests/*.csproj'
+        arguments: '--configuration $(buildConfiguration)'
+
+#    - task: VSTest@2
+#      inputs:
+#        testSelector: 'testAssemblies'
+#        testAssemblyVer2: |
+#          tests\**\*Tests*.dll
+#          !**\obj\**
+#          !**\xunit.runner.visualstudio.testadapter.dll
+#          !**\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+#        searchFolder: '$(System.DefaultWorkingDirectory)'
     - task: DotNetCoreCLI@2
       inputs:
         command: 'pack'
