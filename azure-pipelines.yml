@@ -19,6 +19,7 @@ stages:
   jobs: 
   - job: Build
     steps:
+
     - task: gitversion/execute@0
       displayName: GitVersion
 
@@ -49,6 +50,7 @@ stages:
         arguments: '--configuration $(buildConfiguration)'    
 
     - task: DotNetCoreCLI@2
+      displayName: Execute Unit Tests
       inputs:
         command: test
         projects: '**/*Tests/*.csproj'
