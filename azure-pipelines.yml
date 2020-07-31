@@ -7,8 +7,7 @@ trigger:
  branches:
    include:
     - '*'
-pool:
-  vmImage: 'windows-latest'
+pool: DotNetConcept
 
 variables:
   buildConfiguration: 'Release'
